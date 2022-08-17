@@ -53,7 +53,7 @@ while True:
             coin += money//current_price
             money -= coin*current_price
             buy_point = current_price
-            print(money,coin)
+            print(money,",",coin)
         elif (current_price < ma) and (current_price > buy_point) and (coin > 0):
             money += coin*current_price
             coin = 0
