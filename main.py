@@ -34,30 +34,29 @@ def test():
 
 #초기화
 current_time = datetime.now()
-past_price   = pyupbit.get_ohlcv(ticker=ticker, interval='minute1', count=10) 
-yesterday    = pyupbit.get_ohlcv(ticker=ticker, interval='day', count=2)
+past_price   = pyupbit.get_ohlcv(ticker=ticker, interval="minute1", count=10) 
+yesterday    = pyupbit.get_ohlcv(ticker=ticker, interval="day", count=2)
 ma = get_ma()
 buy_point = 0
 
 while True:
     if current_time.day != current_day():
         current_time = datetime.now()
-        yesterday    = pyupbit.get_ohlcv(ticker=ticker, interval='day', count=2)
+        yesterday    = pyupbit.get_ohlcv(ticker=ticker, interval="day", count=2)
     if current_time.minute != current_minute():
         current_time = datetime.now()
-        past_price   = pyupbit.get_ohlcv(ticker=ticker, interval='minute1', count=10) 
+        past_price   = pyupbit.get_ohlcv(ticker=ticker, interval="minute1", count=10) 
         ma = get_ma()
     current_price = pyupbit.get_current_price(ticker)
-    if current_price > yester_low():
-        if (current_price > ma) and (money >= current_price):
-            coin += money//current_price
-            money -= coin*current_price
-            buy_point = current_price
-            print(money,",",coin)
-        elif (current_price < ma) and (current_price > buy_point) and (coin > 0):
-            money += coin*current_price
-            coin = 0
-            print(money)
+    if (current_price > ma) and (money >= current_price):
+        coin += money//current_price
+        money -= coin*current_price
+        buy_point = current_price
+        print(money,",",coin)
+    elif ((current_price < ma) and (current_price > buy_point)) and (coin > 0):
+        money += coin*current_price
+        coin = 0
+        print(money)
     if money+coin*current_price <= 0:
         print("u screwed up")
         break
