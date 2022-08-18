@@ -10,12 +10,12 @@ ticker  = "KRW-ETC"
 def get_ma():
     arr  = []
     for i in range(10):
-        arr.append(past_price.iloc[i]['close'])
+        arr.append(past_price.iloc[i]["close"])
     res = mean(arr)
     return res
 
 def yester_low():
-    res1 = yesterday.iloc[0]['low']
+    res1 = yesterday.iloc[0]["low"]
     return res1
 
 def current_day():
@@ -29,7 +29,7 @@ def current_minute():
     return minute
 
 def test():
-    res2 = (yesterday.iloc[0]['high']-yesterday.iloc[0]['low'])*0.5
+    res2 = (yesterday.iloc[0]["high"]-yesterday.iloc[0]["low"])*0.5
     return res2
 
 #초기화
