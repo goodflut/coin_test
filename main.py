@@ -57,6 +57,10 @@ while True:
         money += coin*current_price
         coin = 0
         print(money)
+    elif (current_price <= buy_point-1000) and (coin >0):
+        money += coin*current_price
+        coin = 0
+        print(money)
     if money+coin*current_price <= 0:
         print("u screwed up")
         break
