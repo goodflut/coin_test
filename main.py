@@ -48,16 +48,16 @@ while True:
         past_price   = pyupbit.get_ohlcv(ticker=ticker, interval="minute1", count=10) 
         ma = get_ma()
     current_price = pyupbit.get_current_price(ticker)
-    if (current_price > ma) and (money >= current_price):
+    if (current_price <= ma) and (money >= current_price):
         coin += money//current_price
         money -= coin*current_price
         buy_point = current_price
         print(money,",",coin)
-    elif ((current_price < ma) and (current_price > buy_point)) and (coin > 0):
+    elif ((current_price > ma) and (current_price > buy_point)) and (coin > 0):
         money += coin*current_price
         coin = 0
         print(money)
-    elif (current_price <= buy_point-1000) and (coin >0):
+    elif (current_price <= buy_point-1000) and (coin >0): 
         money += coin*current_price
         coin = 0
         print(money)
